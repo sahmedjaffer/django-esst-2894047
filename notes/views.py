@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView,UpdateView,DeleteView, DetailView, ListView
 # Create your views here.
-
+from .forms import NotesForm
 from .models import Notes
 
 class NotesListView(ListView):
@@ -14,7 +14,7 @@ class PopularNotesListView(ListView):
    model = Notes
    context_object_name = "notes"
    template_name = "notes/notes_list.html"
-   queryset = Notes.objects.filter(likes__gt=0)
+   queryset = Notes.objects.filter(likes__gt=0) #gt = greater than
 
 
 class NotesDetailView(DetailView):
@@ -24,9 +24,14 @@ class NotesDetailView(DetailView):
 
 class NotesCreateView(CreateView):
    model = Notes
-   fields = ['title','text']
    success_url = '/smart/notes'
+   form_class = NotesForm
 
+
+class NotesUpdateView(UpdateView):
+   model = Notes
+   success_url = '/smart/notes'
+   form_class = NotesForm   
 
 
 

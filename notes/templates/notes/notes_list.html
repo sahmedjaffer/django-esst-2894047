@@ -8,9 +8,8 @@
             {% for note in notes %}
                 <div class="col">
                     <div class="p-3 border">
-                        <h3>{{note.title}}</h3>
+                        <h3><a class="" href="{% url 'notes.detail' pk=note.id %}" >{{note.title}}</a></h3>
                         {{note.text|truncatechars:12}}
-                        <a class="btn btn-primary" href="{% url 'notes.detail' pk=note.id %}" >view note</a>
                     </div>
                 </div>
             {% endfor %}
